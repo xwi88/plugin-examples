@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package pb;
+
+
+import "hello_abi.proto";
+//--go_opt=paths=source_relative, ignore absolute dir
+
+option go_package = ".;pb";
+option java_package = "com.github.xwi88";
+
+service Greeter {
+    // Sends a greeting
+    rpc SayHello (pb.HelloRequest) returns (pb.HelloReply) {
+    }
+}
