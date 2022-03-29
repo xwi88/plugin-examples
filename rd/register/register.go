@@ -8,15 +8,15 @@ import (
 	"strings"
 	"time"
 
-	clientV3 "go.etcd.io/etcd/client/v3"
-
 	"github.com/v8fg/rd"
+	"github.com/v8fg/rd/config"
+	clientV3 "go.etcd.io/etcd/client/v3"
 
 	"github.com/xwi88/plugin-examples/internal/utils"
 )
 
 var (
-	registerConfig rd.RegisterConfig
+	registerConfig config.RegisterConfig
 	etcdConfig     clientV3.Config
 )
 
@@ -67,9 +67,9 @@ func initRegisterConfig() {
 	logger := log.New(log.Writer(), fmt.Sprintf("[%v] ", moduleName), log.LstdFlags)
 	logger = nil
 
-	registerConfig = rd.RegisterConfig{
+	registerConfig = config.RegisterConfig{
 		TTL: time.Second * 10,
-		CommonConfig: rd.CommonConfig{
+		CommonConfig: config.CommonConfig{
 			ChannelBufferSize: 64,
 			ErrorsHandler:     errorsHandler,
 			MessagesHandler:   messagesHandler,
@@ -92,7 +92,7 @@ func initRegisterConfig() {
 
 }
 
-func registerServer(registerConfig rd.RegisterConfig, client *clientV3.Client, etcdConfig clientV3.Config) error {
+func registerServer(registerConfig config.RegisterConfig, client *clientV3.Client, etcdConfig clientV3.Config) error {
 	return rd.RegisterEtcd(&registerConfig, nil, &clientV3.Config{
 		Endpoints:   endpoints,
 		DialTimeout: time.Second * 5,

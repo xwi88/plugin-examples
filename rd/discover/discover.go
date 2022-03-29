@@ -8,15 +8,15 @@ import (
 	"strings"
 	"time"
 
-	clientV3 "go.etcd.io/etcd/client/v3"
-
 	"github.com/v8fg/rd"
+	"github.com/v8fg/rd/config"
+	clientV3 "go.etcd.io/etcd/client/v3"
 
 	"github.com/xwi88/plugin-examples/internal/utils"
 )
 
 var (
-	discoverConfig rd.DiscoverConfig
+	discoverConfig config.DiscoverConfig
 	etcdConfig     clientV3.Config
 )
 
@@ -68,8 +68,8 @@ func initDiscoverConfig() {
 	logger := log.New(log.Writer(), fmt.Sprintf("[%v] ", moduleName), log.LstdFlags)
 	logger = nil
 
-	discoverConfig = rd.DiscoverConfig{
-		CommonConfig: rd.CommonConfig{
+	discoverConfig = config.DiscoverConfig{
+		CommonConfig: config.CommonConfig{
 			ChannelBufferSize: 64,
 			ErrorsHandler:     errorsHandler,
 			MessagesHandler:   messagesHandler,
@@ -88,7 +88,7 @@ func initDiscoverConfig() {
 	// discoverConfig.Logger = logger
 }
 
-func registerDiscover(discoverConfig rd.DiscoverConfig, client *clientV3.Client, etcdConfig clientV3.Config) error {
+func registerDiscover(discoverConfig config.DiscoverConfig, client *clientV3.Client, etcdConfig clientV3.Config) error {
 	err := rd.DiscoverEtcd(&discoverConfig, client, &etcdConfig)
 	return err
 }
