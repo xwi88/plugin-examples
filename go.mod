@@ -5,14 +5,12 @@ go 1.18
 require (
 	github.com/golang/protobuf v1.5.2
 	github.com/satori/go.uuid v1.2.0
-	github.com/v8fg/rd v0.0.3
+	github.com/v8fg/rd v0.0.4
 	go.etcd.io/etcd/client/v3 v3.5.2
 	go.uber.org/atomic v1.9.0
 	google.golang.org/grpc v1.45.0
 	google.golang.org/protobuf v1.28.0
 )
-
-replace github.com/v8fg/rd => ../../v8fg/rd
 
 require (
 	github.com/coreos/go-semver v0.3.0 // indirect
